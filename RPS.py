@@ -1,10 +1,24 @@
-# The example function below keeps track of the opponent's history and plays whatever the opponent played two plays ago. It is not a very good player so you will need to change the code to pass the challenge.
-
+from collections import Counter
+import random
 def player(prev_play, opponent_history=[]):
-    opponent_history.append(prev_play)
+    if prev_play:
+        opponent_history.append(prev_play)
 
-    guess = "R"
-    if len(opponent_history) > 2:
-        guess = opponent_history[-2]
+    ideal_response = {'P': 'S', 'R': 'P', 'S': 'R'}
+
+    guess = random.choice(["R","S","P"])
+
+    if len(opponent_history) >= 7:
+        recent_moves = "".join(opponent_history[-7:])
+
+        potential_moves = {'R': 0, 'P': 0, 'S': 0}
+        for i in range(len(opponent_history) - 7):
+            if "".join(opponent_history[i:i+7]) == recent_moves:
+                if i + 7 < len(opponent_history):  # Ensure index is in bounds
+                    next_move = opponent_history[i+7]
+                    potential_moves[next_move] += 1
+
+        predicted_move = max(potential_moves, key=potential_moves.get)
+        guess = ideal_response[predicted_move]
 
     return guess
