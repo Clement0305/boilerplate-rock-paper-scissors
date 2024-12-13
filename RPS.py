@@ -14,7 +14,7 @@ def player(prev_play, opponent_history=[]):
         potential_moves = {'R': 0, 'P': 0, 'S': 0}
         for i in range(len(opponent_history) - 7):
             if "".join(opponent_history[i:i+7]) == recent_moves:
-                if i + 7 < len(opponent_history):  # Ensure index is in bounds
+                if i + 7 < len(opponent_history):
                     next_move = opponent_history[i+7]
                     potential_moves[next_move] += 1
 
