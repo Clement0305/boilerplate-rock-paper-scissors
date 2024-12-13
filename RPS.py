@@ -6,7 +6,7 @@ def player(prev_play, opponent_history=[]):
     
     ideal_response = {'P': 'S', 'R': 'P', 'S': 'R'}
     
-    guess = random.choice(["R","S","P"])
+    guess = random.choice(["R","S","P"])jbnj
     
     if len(opponent_history) >= 9:
         recent_moves = "".join(opponent_history[-9:])
